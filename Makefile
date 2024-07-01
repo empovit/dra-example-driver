@@ -149,6 +149,7 @@ generate-crds: vendor
 $(DOCKER_TARGETS): docker-%: .build-image
 	@echo "Running 'make $(*)' in docker container $(BUILDIMAGE)"
 	$(DOCKER) run \
+        --privileged \
 		--rm \
 		-e HOME=$(PWD) \
 		-e GOCACHE=$(PWD)/.cache/go \
