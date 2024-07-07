@@ -38,7 +38,14 @@ spec:
   - name: gpu
     source:
       resourceClaimTemplateName: gpu.example.com
-
+  securityContext:
+    runAsNonRoot: true
+    seccompProfile:
+      type: RuntimeDefault
+    allowPrivilegeEscalation: false
+    capabilities:
+      drop:
+        - ALL
 ---
 apiVersion: v1
 kind: Pod
@@ -60,3 +67,11 @@ spec:
   - name: gpu
     source:
       resourceClaimTemplateName: gpu.example.com
+  securityContext:
+    runAsNonRoot: true
+    seccompProfile:
+      type: RuntimeDefault
+    allowPrivilegeEscalation: false
+    capabilities:
+      drop:
+        - ALL
