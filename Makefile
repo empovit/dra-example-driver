@@ -149,14 +149,12 @@ generate-crds: vendor
 $(DOCKER_TARGETS): docker-%: .build-image
 	@echo "Running 'make $(*)' in docker container $(BUILDIMAGE)"
 	$(DOCKER) run \
-        --privileged \
 		--rm \
 		-e HOME=$(PWD) \
 		-e GOCACHE=$(PWD)/.cache/go \
 		-e GOPATH=$(PWD)/.cache/gopath \
-		-v $(PWD):$(PWD) \
+		-v $(PWD):$(PWD):Z \
 		-w $(PWD) \
-		--user $$(id -u):$$(id -g) \
 		$(BUILDIMAGE) \
 			make $(*)
 
@@ -169,7 +167,6 @@ PHONY: .shell
 		-e HOME=$(PWD) \
 		-e GOCACHE=$(PWD)/.cache/go \
 		-e GOPATH=$(PWD)/.cache/gopath \
-		-v $(PWD):$(PWD) \
+		-v $(PWD):$(PWD):Z \
 		-w $(PWD) \
-		--user $$(id -u):$$(id -g) \
 		$(BUILDIMAGE)
