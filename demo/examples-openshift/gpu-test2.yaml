@@ -43,3 +43,11 @@ spec:
   - name: shared-gpu
     source:
       resourceClaimTemplateName: gpu.example.com
+  securityContext:
+    runAsNonRoot: true
+    seccompProfile:
+      type: RuntimeDefault
+    allowPrivilegeEscalation: false
+    capabilities:
+      drop:
+        - ALL

@@ -51,3 +51,11 @@ spec:
   - name: gpus
     source:
       resourceClaimTemplateName: multiple-gpus
+  securityContext:
+    runAsNonRoot: true
+    seccompProfile:
+      type: RuntimeDefault
+    allowPrivilegeEscalation: false
+    capabilities:
+      drop:
+        - ALL
